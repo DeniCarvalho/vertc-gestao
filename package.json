@@ -1,0 +1,12 @@
+{
+  "name": "vertc-gestao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-dash": "pnpm --filter vertc-dashboard dev"
+  },
+  "keywords": [],
+  "author": "Denisson Carvalho",
+  "license": "ISC"
+}

@@ -1,0 +1,16 @@
+{
+  "private": false,
+  "name": "vertc-ui",
+  "version": "1.0.0",
+  "description": "Shared UI components for VERT projects",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
