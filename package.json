@@ -4,9 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-dash": "pnpm --filter vertc-dashboard dev"
+    "dev-dash": "npx nx dev vertc-dashboard",
+    "dev-ri": "npx nx dev vertc-area-logada",
+    "dev-all": "npx nx run-many --target=dev --all",
+    "build-dash": "npx nx build vertc-dashboard",
+    "build-ri": "npx nx build vertc-area-logada",
+    "start-dash": "npx nx start vertc-dashboard",
+    "start-ri": "npx nx start vertc-area-logada",
+    "build-all": "npx nx run-many --target=build --all",
+    "start-all": "npx nx run-many --target=start --all",
+    "dep-install-all": "npx nx run-many --target=dep-install --all",
+    "clean-cache-all": "npx nx reset"
   },
   "keywords": [],
   "author": "Denisson Carvalho",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nx": "^17.0.2"
+  }
 }
