@@ -23,24 +23,36 @@ function transformLog(data) {
   return data;
 }
 
-async function startBothApps() {
-  // Dashboard
-  const dashboardApp = exec('npx pnpm --filter dashboard dev');
-  dashboardApp.stdout.on('data', (data) => {
-    if (data?.trim()) {
-      data = transformLog(data);
-      process.stdout.write(
-        `${chalk.bgHex('#44a9c6').bold('dashboard:')} ${data}`
-      );
-    }
-  });
-  dashboardApp.stderr.on('data', (data) => {
-    console.error(`dashboard error: ${data}`);
-  });
+function isFinished(data) {
+  const isServerUp = data?.includes('[remix-serve]');
+  if (isServerUp) return true;
+  return false;
+}
 
-  // Espere 5 segundos
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+function startDashboardApp() {
+  return new Promise((resolve, reject) => {
+    // Dashboard
+    const dashboardApp = exec('npx pnpm --filter dashboard dev');
+    dashboardApp.stdout.on('data', (data) => {
+      if (data?.trim()) {
+        data = transformLog(data);
+        process.stdout.write(
+          `${chalk.bgHex('#44a9c6').bold('dashboard:')} ${data}`
+        );
+      }
+      if (isFinished(data)) resolve();
+    });
+    dashboardApp.stderr.on('data', (data) => {
+      console.error(`dashboard error: ${data}`);
+    });
+    dashboardApp.on('exit', (code) => {
+      console.log(`dashboard exited with code ${code}`);
+      reject();
+    });
+  });
+}
 
+function startAreaLogadaApp() {
   // Area logada
   const areaLogadaApp = exec('npx pnpm --filter area-logada dev');
   areaLogadaApp.stdout.on('data', (data) => {
@@ -55,6 +67,12 @@ async function startBothApps() {
     console.error(`area-logada error: ${data}`);
   });
 }
+
+async function startBothApps() {
+  await startDashboardApp();
+  startAreaLogadaApp();
+}
+
 startBothApps().catch((err) => {
   console.error('Erro ao inicializar apps:', err);
 });
