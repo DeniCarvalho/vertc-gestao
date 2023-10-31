@@ -3,21 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev-dash": "npx nx dev vertc-dashboard",
-    "dev-ri": "npx nx dev vertc-area-logada",
-    "dev-all": "npx nx run-many --target=dev --all",
-    "build-dash": "npx nx build vertc-dashboard",
-    "build-ri": "npx nx build vertc-area-logada",
-    "start-dash": "npx nx start vertc-dashboard",
-    "start-ri": "npx nx start vertc-area-logada",
-    "build-all": "npx nx run-many --target=build --all",
-    "start-all": "npx nx run-many --target=start --all",
-    "dep-install-all": "npx nx run-many --target=dep-install --all",
-    "clean-cache-all": "npx nx reset"
+    "dev-dash": "npx pnpm --filter dashboard dev",
+    "dev-area": "npx pnpm --filter area-logada dev",
+    "dev-all": "node start-both-apps.js",
+    "clean": "npx pnpm store prune"
   },
   "keywords": [],
   "author": "Denisson Carvalho",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "chalk": "^5.3.0"
+  }
 }
