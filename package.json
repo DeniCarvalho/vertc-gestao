@@ -19,7 +19,5 @@
   "keywords": [],
   "author": "Denisson Carvalho",
   "license": "ISC",
-  "devDependencies": {
-    "nx": "^17.0.2"
-  }
+  "devDependencies": {}
 }
