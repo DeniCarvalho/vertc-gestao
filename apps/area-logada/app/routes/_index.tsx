@@ -1,4 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
+import { MyBrandButton } from '@vertc/design-system';
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,6 +13,7 @@ export default function Index() {
     <div className="h-full w-full bg-transparent">
       <div className="h-full w-full">
         <h1 className="text-brand">Área logada</h1>
+        <MyBrandButton>Testandos</MyBrandButton>
       </div>
     </div>
   );

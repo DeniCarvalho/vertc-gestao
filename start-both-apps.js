@@ -23,16 +23,43 @@ function transformLog(data) {
   return data;
 }
 
-function isFinished(data) {
-  const isServerUp = data?.includes('[remix-serve]');
+function isFinished(data, tag = '[remix-serve]') {
+  const isServerUp = data?.includes(tag);
   if (isServerUp) return true;
   return false;
+}
+
+function startDesignSystemPackage() {
+  return new Promise((resolve, reject) => {
+    // Design system
+    const designSystemPackage = exec(
+      'npx pnpm --filter @vertc/design-system dev'
+    );
+    designSystemPackage.stdout.on('data', (data) => {
+      if (data?.trim()) {
+        data = transformLog(data);
+        process.stdout.write(
+          `${chalk.bgHex('#c644a9').bold('design-system:')} ${data}`
+        );
+      }
+      if (isFinished(data, '[closeBundle]')) resolve();
+    });
+    designSystemPackage.stderr.on('data', (data) => {
+      console.error(`design-system error: ${data}`);
+      reject();
+    });
+
+    designSystemPackage.on('exit', (code) => {
+      console.log(`design-system exited with code ${code}`);
+      reject();
+    });
+  });
 }
 
 function startDashboardApp() {
   return new Promise((resolve, reject) => {
     // Dashboard
-    const dashboardApp = exec('npx pnpm --filter dashboard dev');
+    const dashboardApp = exec('npx pnpm --filter @vertc/dashboard dev');
     dashboardApp.stdout.on('data', (data) => {
       if (data?.trim()) {
         data = transformLog(data);
@@ -44,6 +71,7 @@ function startDashboardApp() {
     });
     dashboardApp.stderr.on('data', (data) => {
       console.error(`dashboard error: ${data}`);
+      reject();
     });
     dashboardApp.on('exit', (code) => {
       console.log(`dashboard exited with code ${code}`);
@@ -53,24 +81,34 @@ function startDashboardApp() {
 }
 
 function startAreaLogadaApp() {
-  // Area logada
-  const areaLogadaApp = exec('npx pnpm --filter area-logada dev');
-  areaLogadaApp.stdout.on('data', (data) => {
-    if (data?.trim()) {
-      data = transformLog(data);
-      process.stdout.write(
-        `${chalk.bgHex('#44c66b').bold('area-logada:')} ${data}`
-      );
-    }
-  });
-  areaLogadaApp.stderr.on('data', (data) => {
-    console.error(`area-logada error: ${data}`);
+  return new Promise((resolve, reject) => {
+    // Area logada
+    const areaLogadaApp = exec('npx pnpm --filter @vertc/area-logada dev');
+    areaLogadaApp.stdout.on('data', (data) => {
+      if (data?.trim()) {
+        data = transformLog(data);
+        process.stdout.write(
+          `${chalk.bgHex('#44c66b').bold('area-logada:')} ${data}`
+        );
+      }
+      if (isFinished(data)) resolve();
+    });
+    areaLogadaApp.stderr.on('data', (data) => {
+      console.error(`area-logada error: ${data}`);
+      reject();
+    });
+
+    areaLogadaApp.on('exit', (code) => {
+      console.log(`area-logada exited with code ${code}`);
+      reject();
+    });
   });
 }
 
 async function startBothApps() {
+  await startDesignSystemPackage();
   await startDashboardApp();
-  startAreaLogadaApp();
+  await startAreaLogadaApp();
 }
 
 startBothApps().catch((err) => {
