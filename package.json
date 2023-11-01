@@ -7,13 +7,13 @@
   "scripts": {
     "dev-dash": "node dev-both-apps.js --apps=dashboard",
     "dev-area": "node dev-both-apps.js --apps=area-logada",
-    "dev-ds": "npx pnpm --filter @vertc/design-system dev",
+    "dev-ds": "npx pnpm --filter vertc-design-system dev",
     "dev-all": "node dev-both-apps.js",
     "build-dash": "node build-both-apps.js --apps=dashboard",
     "build-area": "node build-both-apps.js --apps=area-logada",
-    "build-ds": "npx pnpm --filter @vertc/design-system build",
+    "build-ds": "npx pnpm --filter vertc-design-system build",
     "build-all": "node build-both-apps.js",
-    "publish-ds": "npx pnpm --filter @vertc/design-system build && npx pnpm --filter @vertc/design-system publish "
+    "publish-ds": "npx pnpm --filter vertc-design-system build && npx pnpm --filter vertc-design-system publish "
   },
   "keywords": [],
   "author": "Denisson Carvalho",

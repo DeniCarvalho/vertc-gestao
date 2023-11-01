@@ -1,5 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
-import { Button } from '@vertc/design-system';
+import { Button } from 'vertc-design-system';
 
 export const meta: MetaFunction = () => {
   return [

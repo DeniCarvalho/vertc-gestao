@@ -1,5 +1,5 @@
 {
-  "name": "@vertc/design-system",
+  "name": "vertc-design-system",
   "private": false,
   "version": "1.0.0",
   "type": "module",

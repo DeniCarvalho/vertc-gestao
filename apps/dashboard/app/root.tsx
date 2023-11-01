@@ -8,7 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import designSystem from '@vertc/design-system/dist/style.css';
+import designSystem from 'vertc-design-system/dist/style.css';
 import styles from './main.css';
 
 export const links: LinksFunction = () => [

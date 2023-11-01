@@ -33,7 +33,7 @@ function startDesignSystemPackage() {
   return new Promise((resolve, reject) => {
     // Design system
     const designSystemPackage = exec(
-      'npx pnpm --filter @vertc/design-system build'
+      'npx pnpm --filter vertc-design-system build'
     );
     designSystemPackage.stdout.on('data', (data) => {
       if (data?.trim()) {
