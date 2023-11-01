@@ -8,14 +8,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import tailwindcss from '@vertc/tailwind-config/tailwindcss.css';
-import styles from './main.css';
 import designSystem from '@vertc/design-system/dist/style.css';
+import styles from './main.css';
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: tailwindcss },
-  { rel: 'stylesheet', href: styles },
   { rel: 'stylesheet', href: designSystem },
+  { rel: 'stylesheet', href: styles },
   {
     rel: 'preconnect',
     href: 'https://fonts.googleapis.com',

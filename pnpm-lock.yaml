@@ -54,9 +54,6 @@ importers:
       '@vertc/design-system':
         specifier: workspace:*
         version: link:../../packages/design-system
-      '@vertc/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       eslint:
         specifier: ^8.38.0
         version: 8.52.0
@@ -100,21 +97,45 @@ importers:
       '@vertc/design-system':
         specifier: workspace:*
         version: link:../../packages/design-system
-      '@vertc/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       eslint:
         specifier: ^8.38.0
         version: 8.52.0
 
   packages/design-system:
     dependencies:
+      '@radix-ui/react-slot':
+        specifier: ^1.0.2
+        version: 1.0.2(@types/react@18.2.33)(react@18.2.0)
+      autoprefixer:
+        specifier: ^10.4.16
+        version: 10.4.16(postcss@8.4.31)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
+      lucide-react:
+        specifier: ^0.291.0
+        version: 0.291.0(react@18.2.0)
+      postcss:
+        specifier: ^8.4.31
+        version: 8.4.31
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.0.0
+        version: 2.0.0
+      tailwindcss:
+        specifier: ^3.3.5
+        version: 3.3.5
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
     devDependencies:
       '@types/node':
         specifier: ^20.8.10
@@ -131,9 +152,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.0.0
         version: 6.9.1(eslint@8.52.0)(typescript@5.2.2)
-      '@vertc/tailwind-config':
-        specifier: workspace:*
-        version: link:../tailwind-config
       '@vitejs/plugin-react':
         specifier: ^4.0.3
         version: 4.1.0(vite@4.5.0)
@@ -146,6 +164,9 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.3
         version: 0.4.4(eslint@8.52.0)
+      postcss-import:
+        specifier: ^15.1.0
+        version: 15.1.0(postcss@8.4.31)
       typescript:
         specifier: ^5.0.2
         version: 5.2.2
@@ -155,25 +176,6 @@ importers:
       vite-plugin-dts:
         specifier: ^3.6.3
         version: 3.6.3(@types/node@20.8.10)(typescript@5.2.2)(vite@4.5.0)
-
-  packages/tailwind-config:
-    dependencies:
-      autoprefixer:
-        specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.31)
-      postcss:
-        specifier: ^8.4.31
-        version: 8.4.31
-      tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.5
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.5)
-    devDependencies:
-      postcss-import:
-        specifier: ^15.1.0
-        version: 15.1.0(postcss@8.4.31)
 
 packages:
 
@@ -581,7 +583,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: true
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -1265,6 +1266,35 @@ packages:
     dev: true
     optional: true
 
+  /@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.33)(react@18.2.0):
+    resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@types/react': 18.2.33
+      react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-slot@1.0.2(@types/react@18.2.33)(react@18.2.0):
+    resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.33)(react@18.2.0)
+      '@types/react': 18.2.33
+      react: 18.2.0
+    dev: false
+
   /@remix-run/css-bundle@2.2.0:
     resolution: {integrity: sha512-PwbtsQx0QpGt93m2nMpdVoH/a7q9amU+vAXF2qtGruRf0PZWSwxc5LYnr9bHlG80SgyixfTeKT93BY/qFpNK+A==}
     engines: {node: '>=18.0.0'}
@@ -1684,7 +1714,6 @@ packages:
 
   /@types/prop-types@15.7.9:
     resolution: {integrity: sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==}
-    dev: true
 
   /@types/react-dom@18.2.14:
     resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
@@ -1698,11 +1727,9 @@ packages:
       '@types/prop-types': 15.7.9
       '@types/scheduler': 0.16.5
       csstype: 3.1.2
-    dev: true
 
   /@types/scheduler@0.16.5:
     resolution: {integrity: sha512-s/FPdYRmZR8SjLWGMCuax7r3qCWQw9QKHzXVukAuuIJkXkDRwp+Pu5LMIVFi0Fxbav35WURicYr8u1QsoybnQw==}
-    dev: true
 
   /@types/semver@7.5.4:
     resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
@@ -2572,6 +2599,12 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /class-variance-authority@0.7.0:
+    resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
+    dependencies:
+      clsx: 2.0.0
+    dev: false
+
   /clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
     engines: {node: '>=6'}
@@ -2593,6 +2626,11 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
     dev: true
+
+  /clsx@2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -2717,7 +2755,6 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
-    dev: true
 
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -4630,6 +4667,14 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  /lucide-react@0.291.0(react@18.2.0):
+    resolution: {integrity: sha512-79jHlT9Je2PXSvXIBGDkItCK7In2O9iKnnSJ/bJxvIBOFaX2Ex0xEcC4fRS/g0F2uQGFejjmn2qWhwdc5wicMQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -5938,7 +5983,6 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
-    dev: true
 
   /regexp.prototype.flags@1.5.1:
     resolution: {integrity: sha512-sy6TXMN+hnP/wMy+ISxg3krXx7BAtWVO4UouuCN/ziM9UEne0euamVNafDfvC83bRNr95y0V5iijeDQFUNpvrg==}
@@ -6450,6 +6494,12 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /tailwind-merge@2.0.0:
+    resolution: {integrity: sha512-WO8qghn9yhsldLSg80au+3/gY9E4hFxIvQ3qOmlpXnqpDKoMruKfi/56BbbMg6fHTQJ9QD3cc79PoWqlaQE4rw==}
+    dependencies:
+      '@babel/runtime': 7.23.2
+    dev: false
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.3.5):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}

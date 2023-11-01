@@ -5,11 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev-dash": "npx pnpm --recursive --parallel --stream --filter @vertc/design-system --filter @vertc/dashboard run dev",
-    "dev-area": "npx pnpm --recursive --parallel --stream --filter @vertc/design-system --filter @vertc/area-logada run dev",
+    "dev-dash": "node dev-both-apps.js --apps=dashboard",
+    "dev-area": "node dev-both-apps.js --apps=area-logada",
     "dev-ds": "npx pnpm --filter @vertc/design-system dev",
-    "dev-all": "node start-both-apps.js",
-    "clean": "npx pnpm store prune"
+    "dev-all": "node dev-both-apps.js",
+    "build-dash": "node build-both-apps.js --apps=dashboard",
+    "build-area": "node build-both-apps.js --apps=area-logada",
+    "build-ds": "npx pnpm --filter @vertc/design-system build",
+    "build-all": "node build-both-apps.js"
   },
   "keywords": [],
   "author": "Denisson Carvalho",

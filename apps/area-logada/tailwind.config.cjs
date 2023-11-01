@@ -1,1 +1,1 @@
-module.exports = require('@vertc/tailwind-config/tailwind.config.cjs');
+module.exports = require('@vertc/design-system/tailwind.config.cjs');

@@ -33,7 +33,7 @@ function startDesignSystemPackage() {
   return new Promise((resolve, reject) => {
     // Design system
     const designSystemPackage = exec(
-      'npx pnpm --filter @vertc/design-system dev'
+      'npx pnpm --filter @vertc/design-system build'
     );
     designSystemPackage.stdout.on('data', (data) => {
       if (data?.trim()) {
@@ -50,67 +50,68 @@ function startDesignSystemPackage() {
     });
 
     designSystemPackage.on('exit', (code) => {
-      console.log(`design-system exited with code ${code}`);
+      console.log(`design-system: build finished ${code}`);
       reject();
     });
   });
 }
 
 function startDashboardApp() {
-  return new Promise((resolve, reject) => {
-    // Dashboard
-    const dashboardApp = exec('npx pnpm --filter @vertc/dashboard dev');
-    dashboardApp.stdout.on('data', (data) => {
-      if (data?.trim()) {
-        data = transformLog(data);
-        process.stdout.write(
-          `${chalk.bgHex('#44a9c6').bold('dashboard:')} ${data}`
-        );
-      }
-      if (isFinished(data)) resolve();
-    });
-    dashboardApp.stderr.on('data', (data) => {
-      console.error(`dashboard error: ${data}`);
-      reject();
-    });
-    dashboardApp.on('exit', (code) => {
-      console.log(`dashboard exited with code ${code}`);
-      reject();
-    });
+  // Dashboard
+  const dashboardApp = exec('npx pnpm --filter @vertc/dashboard build');
+  dashboardApp.stdout.on('data', (data) => {
+    if (data?.trim()) {
+      data = transformLog(data);
+      process.stdout.write(
+        `${chalk.bgHex('#44a9c6').bold('dashboard:')} ${data}`
+      );
+    }
+  });
+  dashboardApp.stderr.on('data', (data) => {
+    console.error(`dashboard error: ${data}`);
+    reject();
+  });
+  dashboardApp.on('exit', (code) => {
+    console.log(`dashboard: build finished ${code}`);
   });
 }
 
 function startAreaLogadaApp() {
-  return new Promise((resolve, reject) => {
-    // Area logada
-    const areaLogadaApp = exec('npx pnpm --filter @vertc/area-logada dev');
-    areaLogadaApp.stdout.on('data', (data) => {
-      if (data?.trim()) {
-        data = transformLog(data);
-        process.stdout.write(
-          `${chalk.bgHex('#44c66b').bold('area-logada:')} ${data}`
-        );
-      }
-      if (isFinished(data)) resolve();
-    });
-    areaLogadaApp.stderr.on('data', (data) => {
-      console.error(`area-logada error: ${data}`);
-      reject();
-    });
+  // Area logada
+  const areaLogadaApp = exec('npx pnpm --filter @vertc/area-logada build');
+  areaLogadaApp.stdout.on('data', (data) => {
+    if (data?.trim()) {
+      data = transformLog(data);
+      process.stdout.write(
+        `${chalk.bgHex('#44c66b').bold('area-logada:')} ${data}`
+      );
+    }
+  });
+  areaLogadaApp.stderr.on('data', (data) => {
+    console.error(`area-logada error: ${data}`);
+  });
 
-    areaLogadaApp.on('exit', (code) => {
-      console.log(`area-logada exited with code ${code}`);
-      reject();
-    });
+  areaLogadaApp.on('exit', (code) => {
+    console.log(`area-logada: build finished ${code}`);
   });
 }
 
-async function startBothApps() {
+async function devBothApps() {
+  const args = process.argv.slice(2);
+  let apps = [];
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i].startsWith('--apps=')) {
+      apps = args[i].split('=')[1].split(',');
+    }
+  }
+
   await startDesignSystemPackage();
-  await startDashboardApp();
-  await startAreaLogadaApp();
+
+  if (apps.length === 0 || apps.includes('dashboard')) startDashboardApp();
+  if (apps.length === 0 || apps.includes('area-logada')) startAreaLogadaApp();
 }
 
-startBothApps().catch((err) => {
+devBothApps().catch((err) => {
   console.error('Erro ao inicializar apps:', err);
 });

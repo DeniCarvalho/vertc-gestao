@@ -1,6 +1,8 @@
-import '@vertc/tailwind-config/tailwindcss.css';
+import './globals.css';
 
-// export individual components
-import MyBrandButton from '@/components/myBrandButton';
+import { Button, ButtonProps, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-export { MyBrandButton };
+export { cn };
+export { Button, buttonVariants };
+export type { ButtonProps };

@@ -1,1 +1,1 @@
-module.exports = require('@vertc/tailwind-config/postcss.config.cjs');
+module.exports = require('@vertc/design-system/postcss.config.cjs');

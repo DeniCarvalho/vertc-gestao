@@ -1,1 +1,9 @@
-module.exports = require('@vertc/tailwind-config/postcss.config.cjs');
+const config = require('./tailwind.config.cjs');
+
+module.exports = {
+  plugins: {
+    'postcss-import': {},
+    tailwindcss: { config },
+    autoprefixer: {},
+  },
+};
