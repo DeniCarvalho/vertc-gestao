@@ -22,7 +22,8 @@
     "clean": "vite clean"
   },
   "publishConfig": {
-    "@vertc:registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
