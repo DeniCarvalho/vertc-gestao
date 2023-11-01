@@ -12,7 +12,8 @@
     "build-dash": "node build-both-apps.js --apps=dashboard",
     "build-area": "node build-both-apps.js --apps=area-logada",
     "build-ds": "npx pnpm --filter @vertc/design-system build",
-    "build-all": "node build-both-apps.js"
+    "build-all": "node build-both-apps.js",
+    "publish-ds": "npx pnpm --filter @vertc/design-system build && npx pnpm --filter @vertc/design-system publish "
   },
   "keywords": [],
   "author": "Denisson Carvalho",

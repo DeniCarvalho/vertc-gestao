@@ -12,8 +12,8 @@ export default function Index() {
   return (
     <div className="h-full w-full bg-black flex justify-center">
       <div className="h-full w-full p-5">
-        <h1 className="text-brand">Dashboard</h1>
-        <Button variant={'ghost'}>Testandos</Button>
+        <h1 className="text-red-50">Dashboard</h1>
+        <Button variant={'default'}>Testandos</Button>
       </div>
     </div>
   );

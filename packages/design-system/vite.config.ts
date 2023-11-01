@@ -1,17 +1,9 @@
 import path from 'path';
-import { LogOptions, createLogger, defineConfig } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 
-const logger = createLogger();
-const customLogger = {
-  ...logger,
-  info: (msg: string, options?: LogOptions) => {
-    logger.info('Hi! I was inserted.\n' + msg, options);
-  },
-};
-
-const myPlugin = () => ({
+const postBuild = () => ({
   name: 'postbuild-commands',
   closeBundle: async () => {
     console.log('[closeBundle]');
@@ -26,7 +18,7 @@ export default defineConfig({
     open: false,
     cors: true,
   },
-  plugins: [react(), dts(), myPlugin()],
+  plugins: [react(), dts(), postBuild()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -36,8 +28,9 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      formats: ['es'],
+      formats: ['es', 'cjs'],
       name: 'VERTC-design-system',
+      fileName: (format) => `index.${format}.js`,
     },
   },
 });
