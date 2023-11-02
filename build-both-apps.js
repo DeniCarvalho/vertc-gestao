@@ -29,6 +29,31 @@ function isFinished(data, tag = '[remix-serve]') {
   return false;
 }
 
+function startCommonPackage() {
+  return new Promise((resolve, reject) => {
+    // Common
+    const CommonPackage = exec('npx pnpm --filter vertc-common build');
+    CommonPackage.stdout.on('data', (data) => {
+      if (data?.trim()) {
+        data = transformLog(data);
+        process.stdout.write(
+          `${chalk.bgHex('#4c51c4').bold('common:')} ${data}`
+        );
+      }
+      if (isFinished(data, '[closeCommon]')) resolve();
+    });
+    CommonPackage.stderr.on('data', (data) => {
+      console.error(`common error: ${data}`);
+      reject();
+    });
+
+    CommonPackage.on('exit', (code) => {
+      console.log(`common: exited with code ${code}`);
+      reject();
+    });
+  });
+}
+
 function startDesignSystemPackage() {
   return new Promise((resolve, reject) => {
     // Design system
@@ -106,6 +131,7 @@ async function devBothApps() {
     }
   }
 
+  await startCommonPackage();
   await startDesignSystemPackage();
 
   if (apps.length === 0 || apps.includes('dashboard')) startDashboardApp();

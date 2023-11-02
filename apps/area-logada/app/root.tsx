@@ -10,6 +10,7 @@ import {
 } from '@remix-run/react';
 import styles from './main.css';
 import designSystem from 'vertc-design-system/dist/style.css';
+import { Toaster } from 'vertc-design-system';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -42,6 +43,7 @@ export default function App() {
       </head>
       <body className="bg-transparent">
         <Outlet />
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

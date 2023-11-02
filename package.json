@@ -13,13 +13,20 @@
     "build-area": "node build-both-apps.js --apps=area-logada",
     "build-ds": "npx pnpm --filter vertc-design-system build",
     "build-all": "node build-both-apps.js",
-    "publish-ds": "npx pnpm --filter vertc-design-system build && npx pnpm --filter vertc-design-system publish --no-git-checks"
+    "publish-ds": "npx pnpm --filter vertc-design-system build && npx pnpm --filter vertc-design-system publish --no-git-checks",
+    "start-dash": "npx pnpm --filter vertc-dashboard start"
   },
   "keywords": [],
   "author": "Denisson Carvalho",
   "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
     "chalk": "^5.3.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7"
   }
 }

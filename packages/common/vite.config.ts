@@ -6,18 +6,12 @@ import dts from 'vite-plugin-dts';
 const postBuild = () => ({
   name: 'postbuild-commands',
   closeBundle: async () => {
-    console.log('[closeBundle]');
+    console.log('[closeCommon]');
   },
 });
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // customLogger,
-  server: {
-    port: 8081,
-    open: false,
-    cors: true,
-  },
   plugins: [react(), dts(), postBuild()],
   resolve: {
     alias: {
@@ -29,7 +23,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs'],
-      name: 'VERTC-design-system',
+      name: 'VERTC-common',
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
