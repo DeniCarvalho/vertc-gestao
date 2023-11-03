@@ -49,6 +49,10 @@ export default function AuthLogin() {
       title: 'Scheduled: Catch up',
       description: 'Friday, February 10, 2023 at 5:57 PM',
       _type: 'success',
+      action: () => {
+        console.log('teste');
+      },
+      actionTitle: 'Entendi',
     });
   };
 
